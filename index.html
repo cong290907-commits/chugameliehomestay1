@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHUG Amélie Homestay - Chạm Vào Chút Thơ Giữa Lòng Thành Phố</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ==========================================
+           1. MÀU SẮC & BIẾN CƠ BẢN (VARIABLES)
+           ========================================== */
+        :root {
+            --primary-color: #2D4030;    /* Xanh rêu đậm Indochine */
+            --accent-color: #C5A059;     /* Vàng đồng ấm */
+            --bg-cream: #F9F6F0;         /* Kem nhạt chủ đạo */
+            --bg-card: #FFFFFF;          /* Trắng cho card */
+            --text-dark: #2B2B2B;        /* Chữ tối màu */
+            --text-muted: #666666;       /* Chữ phụ */
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        /* ==========================================
+           2. RESET & STYLES CHUNG
+           ========================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-cream);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            font-size: 1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            background-color: var(--primary-color);
+            color: #fff;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        /* ==========================================
+           3. HEADER & NAVIGATION
+           ========================================== */
+        .header {
+            background-color: rgba(249, 246, 240, 0.95);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            backdrop-filter: blur(5px);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* ==========================================
+           4. HERO BANNER SECTION
+           ========================================== */
+        .hero {
+            height: 80vh;
+            background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), 
+                        url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            padding: 0 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.2rem;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            max-width: 650px;
+            margin: 0 auto 30px;
+            font-weight: 300;
+        }
+
+        /* ==========================================
+           5. ROOMS SECTION (DANH SÁCH PHÒNG)
+           ========================================== */
+        .rooms-section {
+            padding: 80px 0;
+        }
+
+        .rooms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .room-card {
+            background-color: var(--bg-card);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .room-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .room-img {
+            height: 230px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .room-info {
+            padding: 25px;
+        }
+
+        .room-title {
+            font-size: 1.4rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .room-meta {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .room-desc {
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+        }
+
+        .room-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+
+        .room-price {
+            font-weight: 700;
+            color: var(--accent-color);
+            font-size: 1.1rem;
+        }
+
+        /* ==========================================
+           6. AMENITIES SECTION (TIỆN ÍCH)
+           ========================================== */
+        .amenities-section {
+            padding: 60px 0 80px;
+            background-color: #EFECE6;
+        }
+
+        .amenities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .amenity-card {
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .amenity-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+
+        /* ==========================================
+           7. FOOTER
+           ========================================== */
+        .footer {
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 50px 0 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+
+        .footer-col p {
+            font-size: 0.9rem;
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.85rem;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- KHỐI 1: HEADER & THANH ĐIỀU HƯỚNG -->
+    <header class="header">
+        <div class="container navbar">
+            <a href="#" class="logo">CHUG Amélie</a>
+            <ul class="nav-links">
+                <li><a href="#home">Trang chủ</a></li>
+                <li><a href="#rooms">Hạng phòng</a></li>
+                <li><a href="#amenities">Tiện ích</a></li>
+                <li><a href="#contact">Liên hệ</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- KHỐI 2: HERO BANNER -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>CHUG Amélie Homestay</h1>
+            <p>Chạm vào chút thơ giữa lòng thành phố — Nơi trú ẩn mang cảm hứng Indochine tinh tế và ấm cúng.</p>
+            <a href="#rooms" class="btn">Khám Phá Phòng</a>
+        </div>
+    </section>
+
+    <!-- KHỐI 3: DANH SÁCH PHÒNG (ROOMS) -->
+    <section class="rooms-section container" id="rooms">
+        <h2 class="section-title">Hạng Phòng Thư Giãn</h2>
+        <p class="section-subtitle">Chọn không gian riêng hoàn hảo cho kỳ nghỉ của bạn</p>
+
+        <div class="rooms-grid">
+            <!-- Phòng 1 -->
+            <article class="room-card">
+                <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80" alt="Amélie Cozy Standard" class="room-img">
+                <div class="room-info">
+                    <h3 class="room-title">Amélie Cozy Standard</h3>
+                    <div class="room-meta">
+                        <span>📐 22 m²</span>
+                        <span>🛏️ 1 Giường Đôi</span>
+                    </div>
+                    <p class="room-desc">Tối giản, ấm cúng với tone màu gỗ nhã nhặn. Lựa chọn riêng tư vừa vặn cho chuyến đi 1-2 người.</p>
+                    <div class="room-bottom">
+                        <span class="room-price">650.000đ <small>/đêm</small></span>
+                        <a href="#contact" class="btn">Đặt phòng</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Phòng 2 -->
+            <article class="room-card">
+                <img src="https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=800&q=80" alt="Amélie Deluxe Balcony" class="room-img">
+                <div class="room-info">
+                    <h3 class="room-title">Amélie Deluxe Balcony</h3>
+                    <div class="room-meta">
+                        <span>📐 32 m²</span>
+                        <span>🛏️ 1 Giường King</span>
+                    </div>
+                    <p class="room-desc">Ban công riêng ngập nắng cùng bàn trà chill. Tích hợp bồn tắm nằm thư giãn sau ngày dài.</p>
+                    <div class="room-bottom">
+                        <span class="room-price">950.000đ <small>/đêm</small></span>
+                        <a href="#contact" class="btn">Đặt phòng</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Phòng 3 -->
+            <article class="room-card">
+                <img src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=800&q=80" alt="Amélie Family Suite" class="room-img">
+                <div class="room-info">
+                    <h3 class="room-title">Amélie Family Suite</h3>
+                    <div class="room-meta">
+                        <span>📐 50 m²</span>
+                        <span>🛏️ 2 Giường King</span>
+                    </div>
+                    <p class="room-desc">Căn hộ gia đình không gian mở, có bồn tắm gỗ Hinoki và khu vực tiếp khách sang trọng.</p>
+                    <div class="room-bottom">
+                        <span class="room-price">1.500.000đ <small>/đêm</small></span>
+                        <a href="#contact" class="btn">Đặt phòng</a>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- KHỐI 4: TIỆN ÍCH NỔI BẬT (AMENITIES) -->
+    <section class="amenities-section" id="amenities">
+        <div class="container">
+            <h2 class="section-title">Tiện Ích Trải Nghiệm</h2>
+            <p class="section-subtitle">Những khoảnh khắc nhỏ đong đầy niềm vui tại CHUG Amélie</p>
+
+            <div class="amenities-grid">
+                <div class="amenity-card">
+                    <span class="amenity-icon">🍢</span>
+                    <h3>Sân Vườn BBQ</h3>
+                    <p>Không gian nướng ngoài trời thoáng đãng, hỗ trợ sẵn bếp nướng cho nhóm bạn.</p>
+                </div>
+                <div class="amenity-card">
+                    <span class="amenity-icon">☕</span>
+                    <h3>Coffee & Tea Box</h3>
+                    <p>Góc tự phục vụ cà phê rang thủ công và trà thảo mộc thơm lành mỗi sáng.</p>
+                </div>
+                <div class="amenity-card">
+                    <span class="amenity-icon">🛁</span>
+                    <h3>Bồn Tắm Gỗ Nhật</h3>
+                    <p>Thả mình ngâm nước ấm trong bồn gỗ Hinoki tự nhiên xua tan mọi mệt mỏi.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- KHỐI 5: FOOTER & LIÊN HỆ -->
+    <footer class="footer" id="contact">
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <h4>CHUG Amélie Homestay</h4>
+                <p>Nơi lưu giữ không gian hoài cổ Indochine kết hợp sự thoải mái hiện đại. Rất hân hạnh được đón tiếp bạn.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Liên Hệ Đặt Phòng</h4>
+                <p>📍 Địa chỉ: Ngõ nhỏ bình yên, Quận Ba Đình, Hà Nội</p>
+                <p>📞 Hotline/Zalo: 098x.xxx.xxx</p>
+                <p>✉️ Email: booking@chugamelie.com</p>
+            </div>
+            <div class="footer-col">
+                <h4>Giờ Nhận / Trả Phòng</h4>
+                <p>Check-in: 14:00</p>
+                <p>Check-out: 12:00 ngày hôm sau</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2026 CHUG Amélie Homestay. Bài tập giữa kỳ môn Lập trình Web.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
